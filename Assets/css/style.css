@@ -1,0 +1,27 @@
+/* * {
+    border: 1px red solid;
+} */
+header {
+    background: linear-gradient(90deg, rgba(6,0,104,1) 0%, rgba(56,56,129,1) 38%, rgba(138,175,183,1) 88%);
+    padding: 1rem;
+    text-shadow: 0 0 5px black, 0 0 5px black;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    height: 3rem;
+  }
+  .input-group-text {
+    height: 3rem;
+  }
+
+.input-group .md-form .form-sm .form-2 .pl-0 {
+    height: 3rem;
+}
+
+.card {
+  background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%);
+  border-radius: 1rem;
+}
