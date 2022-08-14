@@ -2,7 +2,7 @@
     border: 1px red solid;
 } */
 header {
-    background: linear-gradient(90deg, rgba(6,0,104,1) 0%, rgba(56,56,129,1) 38%, rgba(138,175,183,1) 88%);
+    background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%);
     padding: 1rem;
     text-shadow: 0 0 5px black, 0 0 5px black;
 }
@@ -23,5 +23,15 @@ header {
 
 .card {
   background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%);
+  border-radius: 1rem;
+}
+
+#formContainer {
+  height: 3rem;
+}
+
+.city-buttons {
+  height: 3rem;
+  background-color:  rgba(21,12,79,0.6561975131849616);
   border-radius: 1rem;
 }

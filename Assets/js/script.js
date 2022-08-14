@@ -7,39 +7,53 @@ var displayHumidity = document.querySelector('.humidity');
 var displayUV = document.querySelector('.uv-index');
 var fiveDay = document.querySelector('.five-day');
 var cityList = document.querySelector('.city-list');
-var searchedCity = [];
+var searchedCity = "";
 var citiesSearched = [];
 
-// getstoredCity();
-// cityButtons();
+getCityLocal();
+cityButtons();
 
+searchBtn.addEventListener('click', handleFetch)
 
-searchBtn.addEventListener("click", weatherFetch);
-
-function weatherFetch(event) {
+function handleFetch(event) {
     event.preventDefault();
-    console.log(searchInput.value)
-    if (searchInput.value == null) {
-        alert("City not found, please try again!");
+    if (searchInput.value === '') {
+        alert("City not found, please try again");
         return;
+    // } else if (citiesSearched.includes(searchInput.value)) {
+    //     handleSearch(searchInput.value); 
     } else {
-        searchedCity.push(searchInput.value);
-        console.log(searchedCity);
-        setstoredCity
-        getstoredCity();
-        handleSearch(searchInput.value);
-        cityButtons();
+        console.log("item Searched")
+        // citiesSearched.push(searchInput.value)
+        console.log(citiesSearched)
+        var oldSearch = searchInput.value
+        var newSearch = oldSearch.toUpperCase();
+        console.log(newSearch)
+        handleSearch(newSearch)
     };
-};
-
-function setstoredCity() {
-    localStorage.setItem("searchedCity", JSON.stringify(searchedCity))
 }
 
-function getstoredCity() {
-    var storedCity = localStorage.getItem("searchedCity")
+function handleCityBtnFetch(event) {
+    event.preventDefault();
+    if (event.target.innerHTML == null) {
+        console.log("City not found, please try again");
+        return;
+    } else {
+        console.log('button Pressed')
+        handleSearch(event.target.innerHTML)
+    };
+}
+
+function setCityLocal() {
+    localStorage.setItem('citiesSearched', JSON.stringify(citiesSearched))
+        console.log("Storage Set");
+}
+
+function getCityLocal() {
+    var storedCity = localStorage.getItem("citiesSearched")
     if (storedCity) {
-        searchedCity = JSON.parse(storedCity)
+        citiesSearched = JSON.parse(storedCity)
+        console.log("Storage Got")
     }
 }
 
@@ -52,8 +66,10 @@ function cityButtons(){
         for (i = 0; i < citiesSearched.length; i++) {
         var cityBtn = document.createElement('button');
         cityList.appendChild(cityBtn)
-        cityBtn.innerHTML = searchedCity[i]
-        cityBtn.className = 'city-buttons'
+        cityBtn.innerHTML = citiesSearched[i]
+        cityBtn.classList.add('city-buttons', 'btn', 'btn-secondary', 'text-white', 'fw-bold', 'fs-4')
+        cityBtn.addEventListener('click', handleCityBtnFetch);   
+        console.log("buttons made");
     }
     };
 };
@@ -63,21 +79,31 @@ function handleSearch(searched){
     for (let i = 0; i< removeLi.length; i++) {
         removeLi[i].remove();
     }
-    console.log(searched);
-    getstoredCity();
-    cityButtons();
-    setstoredCity();
+    console.log(searched)
     var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searched + "&appid=b0fa292c20893032e1d93d8d0f087c82"
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
+        // Get Lat/Lon from City Searched API and input it into onecall API call
         .then(function (data) {
+            if (data.cod === '404') {
+                alert("City not found, please try again");
+                cityButtons();
+                return;
+            } 
+            if (!citiesSearched.includes(data.name)) {
+                citiesSearched.push(data.name)
+            }
+            setCityLocal();
+            getCityLocal();
+            cityButtons();
             console.log(data);
             var city = data.name;
             var lat = data.coord.lat;
             var lon = data.coord.lon;
             var requestWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=minutely&appid=b0fa292c20893032e1d93d8d0f087c82"
+            // API call to get one call API for search city via the Lat/Lon
             fetch(requestWeatherUrl)
                 .then (function(response1){
                     return response1.json();
