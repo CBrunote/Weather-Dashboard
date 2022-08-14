@@ -1,8 +1,12 @@
-/* * {
-    border: 1px red solid;
-} */
+:root {
+ --purpleGradient: linear-gradient(0deg, #614385, #516395); 
+ --lightPurple: #516395;
+ --warmPurple:  #614385;
+}
+
 header {
-    background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%);
+    /* background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%); */
+    background: var(--purpleGradient);
     padding: 1rem;
     text-shadow: 0 0 5px black, 0 0 5px black;
 }
@@ -22,7 +26,7 @@ header {
 }
 
 .card {
-  background: linear-gradient(0deg, rgba(63,94,251,0.6449930313922444) 14%, rgba(21,12,79,0.6561975131849616) 54%);
+  background: var(--purpleGradient);
   border-radius: 1rem;
 }
 
@@ -31,7 +35,19 @@ header {
 }
 
 .city-buttons {
-  height: 3rem;
-  background-color:  rgba(21,12,79,0.6561975131849616);
+  background: var(--lightPurple);
   border-radius: 1rem;
+}
+
+.city-buttons:hover {
+  background: var(--warmPurple);
+  box-shadow: 0 0.4rem 1.4rem 0 var(--warmPurple);
+}
+
+.search-button{
+  background: var(--warmPurple);
+}
+
+.search-button:hover {
+  filter: brightness(150%);
 }

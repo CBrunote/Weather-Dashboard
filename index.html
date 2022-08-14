@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://kit.fontawesome.com/f6d3bd14b4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
 
-<body class="bg-dark text-white flex-column min-100-vh">
-    <header class="jumbotron jumbotron-fluid">
+<body class="bg-dark text-white flex-column col-md min-100-vh">
+    <header class="jumbotron jumbotron-fluid mb-3">
         <div class="container">
             <h1 class="display-4 text-white fw-bold text-center app-title"><i class="fa-solid fa-cloud-sun-rain"></i>Weather Dashboard</h1>
         </div>
     </header>
-    <div class="row">
-        <div class="col-3 px-md-4 justify-content-start">
+    <div class="row mx-2">
+        <div class="col-lg-3 px-md-4 justify-content-center">
             <div id="formContainer" class="input-group md-form form-sm form-2">
                 <input class="form-control my-0 py-1" id="city-search" type="text" placeholder="Search for a City" aria-label="Search">
                 <div class="input-group-append">
-                  <span class="search-button input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"></i></span>
+                  <span class="search-button input-group-text lighten-3" id="basic-text1"><i class="fas fa-search text-white"></i></span>
                 </div>
             </div>
+            <button class="btn clear-btn btn-secondary d-grid gap-2 text-white fw-bold m-auto my-2 fs-6">Clear History</button>
             <hr class="my-2">
-            <ul class='city-list d-grid gap-2 align-items-center'>
+            <ul class='city-list d-grid gap-2 align-items-center px-5'>
             </ul>
         </div>
 
-        <div class="col-9 px-md-4">
-            <div class="jumbotron">
+        <div class="col-lg-8 text-center text-lg-start">
+            <div class="jumbotron ">
                 <h1 class="display-5 fw-bolder"><div class="city-name"></div></h1>
-                <p class="lead"><div class="temp">Temp: </div></p>
-                <p class="lead"><div class="wind">Wind: </div></p>
-                <p class="lead"><div class="humidity">Humidity: </div></p>
-                <p class="lead"><div class="uv-index">UV index: </div></p>
+                <p class="lead fw-bold">Temp: <span class="temp"></span></p>
+                <p class="lead fw-bold">Wind: <span class="wind"></span></p>
+                <p class="lead fw-bold">Humidity: <span class="humidity"></span></p>
+                <p class="lead fw-bold">UV index: <span class="uv-index">&nbsp;&nbsp;&nbsp;&nbsp;<span id='uv-index'></span>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
                 <hr class="my-4">
             </div>
             <div class="5-day-container ">
-                <h1>5-day Forecast:</h1>
-                <div class="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-4 justify-content-center five-day">
+                <h1 class="text-center text-lg-start mb-3">5-day Forecast:</h1>
+                <div class="row row-cols-1 row-cols-md-3 row-cols-xxl-5 g-4 justify-content-center five-day">
                 </div>
             </div>
         </div>

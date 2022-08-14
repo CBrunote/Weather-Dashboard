@@ -1,10 +1,12 @@
 var searchBtn = document.querySelector('.search-button');
+var clearBtn = document.querySelector('.clear-btn')
 var searchInput = document.getElementById('city-search');
 var displayCity = document.querySelector('.city-name');
 var displayTemp = document.querySelector('.temp');
 var displayWind = document.querySelector('.wind');
 var displayHumidity = document.querySelector('.humidity');
 var displayUV = document.querySelector('.uv-index');
+var uviValue = document.querySelector('#uv-index');
 var fiveDay = document.querySelector('.five-day');
 var cityList = document.querySelector('.city-list');
 var searchedCity = "";
@@ -13,7 +15,9 @@ var citiesSearched = [];
 getCityLocal();
 cityButtons();
 
-searchBtn.addEventListener('click', handleFetch)
+searchBtn.addEventListener('click', handleFetch);
+
+clearBtn.addEventListener('click', clearHistory);
 
 function handleFetch(event) {
     event.preventDefault();
@@ -44,6 +48,12 @@ function handleCityBtnFetch(event) {
     };
 }
 
+function clearHistory() {
+    citiesSearched.length = 0;
+    setCityLocal();
+    cityButtons();
+};
+
 function setCityLocal() {
     localStorage.setItem('citiesSearched', JSON.stringify(citiesSearched))
         console.log("Storage Set");
@@ -67,7 +77,7 @@ function cityButtons(){
         var cityBtn = document.createElement('button');
         cityList.appendChild(cityBtn)
         cityBtn.innerHTML = citiesSearched[i]
-        cityBtn.classList.add('city-buttons', 'btn', 'btn-secondary', 'text-white', 'fw-bold', 'fs-4')
+        cityBtn.classList.add('city-buttons', 'btn', 'btn-secondary', 'text-white', 'fw-bold', 'fs-4-lg', 'fs-2-md')
         cityBtn.addEventListener('click', handleCityBtnFetch);   
         console.log("buttons made");
     }
@@ -112,10 +122,10 @@ function handleSearch(searched){
                     console.log(data1);
                     // Current Weather For the Selected City
                     displayCity.textContent = city + " : " + moment.unix(data1.current.dt).format("M/DD/YYYY");
-                    displayTemp.textContent = "Temp: " + Math.round(data1.current.temp) + "℉";
-                    displayWind.textContent = "Wind: " + data1.current.wind_speed + " MPH";
-                    displayHumidity.textContent = "Humidity: " + data1.current.humidity + "%";
-                    displayUV.textContent = "UV Index: " + data1.current.uvi
+                    displayTemp.textContent = Math.round(data1.current.temp) + "℉";
+                    displayWind.textContent = data1.current.wind_speed + " MPH";
+                    displayHumidity.textContent = data1.current.humidity + "%";
+                    uviValue.textContent = data1.current.uvi
 
                     // Grab and display weather icon for selected city
                     var currentIcon = data1.current.weather[0].icon;
@@ -152,7 +162,7 @@ function handleSearch(searched){
                     }
 
                     // For loop to create 5 day forecast cards
-                    for (var i = 0; i < (data1.daily.length -3); i++) {
+                    for (var i = 1; i < (data1.daily.length -2); i++) {
                         console.log((data1.daily.length-3));
                         var columnDiv = document.createElement('div');
                         fiveDay.appendChild(columnDiv);
@@ -160,7 +170,7 @@ function handleSearch(searched){
 
                         var card = document.createElement('div');
                         columnDiv.appendChild(card);
-                        card.classList.add("card", "border-dark", "mb-3");
+                        card.classList.add("card", "border-dark", "mb-3", "m-auto");
                         card.style.width = "11rem";
                     
                         var cardBody = document.createElement('div');
