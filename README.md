@@ -12,4 +12,4 @@ This project was created to provide a tool for checking the weather in any city 
 
 Click the link below to visit the deployed application
 
-- [https://cbrunote.github.io/06-Weather-Dashboard/](https://cbrunote.github.io/06-Weather-Dashboard/)
+- [https://cbrunote.github.io/Weather-Dashboard/](https://cbrunote.github.io/Weather-Dashboard/)
